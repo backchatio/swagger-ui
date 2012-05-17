@@ -1,0 +1,78 @@
+// Sass doesn't really like variables to be in a partial, so they're here..
+$main_color_light: #89bf04;
+$main_color_dark: #547f00;
+$http_get_color: #0f6ab4;
+$http_post_color: #10a54a;
+$http_put_color: #c5862b;
+$http_delete_color: #a41e22;
+$code_bg_color: #fcf6db;
+$code_border_color: #e5e0c6;
+$form_color: #0f6ab4;
+$error_color: #cc0000;
+$notice_color: #007f00;
+
+$body_width: 960px;
+$main_column_width: 630px;
+$main_column_margin_right: 30px;
+
+@import "compass/css3";
+@import "zass";
+@import "global";
+@import "fonts";
+@import "custom_mixins";
+
+body {
+
+  ul#resources {
+    padding: 0 15px;
+    font-size: 0.9em;
+    li.resource {
+      border-bottom: 1px solid #dddddd;
+      &:last-child {
+        border-bottom: none; }
+      div.heading {
+        border: 1px solid transparent;
+        @include no_float;
+        h2 {
+          color: #999999;
+          padding-left: 0px;
+          @include float_left;
+          
+          a {
+            color: #999999;
+            &:hover {
+              color: black; } } }
+        ul.options {
+          @include horizontal_list;
+          @include float_right;
+          margin: 14px 10px 0 0;
+          li {
+            color: #666666;
+            font-size: 0.9em;
+            a {
+              color: #aaaaaa;
+              text-decoration: none;
+              &:hover {
+                text-decoration: underline;
+                color: black; } } } } }
+      &:hover, &.active {
+        div.heading {
+          h2 {
+            a {
+              color: black; } }
+          ul.options {
+            li {
+              a {
+                color: #555555; } } } } }
+      ul.endpoints {
+        li.endpoint {
+          ul.operations {
+            li.operation {
+              &.get {
+                @include li_colored_operation($http_get_color); }
+              &.post {
+                @include li_colored_operation($http_post_color); }
+              &.put {
+                @include li_colored_operation($http_put_color); }
+              &.delete {
+                @include li_colored_operation($http_delete_color); } } } } } } } }

@@ -1,7 +1,7 @@
 jQuery(function($) {
 
-  // this.baseUrl = "http://petstore.swagger.wordnik.com/api/resources.json";
-  // this.apiKey = "special-key";
+  this.baseUrl = "http://localhost:8080/1/swagger/resources.json";
+  this.apiKey = "special-key";
   
   var ApiSelectionController = Spine.Controller.create({
     proxied: ["showApi"],

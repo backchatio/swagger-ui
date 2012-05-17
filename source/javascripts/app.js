@@ -1,5 +1,3 @@
-//= require "jquery-1.6.2.min"
-//= require "jquery-ui-1.8.14.custom.min"
 //= require "jquery.ba-bbq.min"
 //= require "jquery.slideto.min"
 //= require "jquery.tmpl"

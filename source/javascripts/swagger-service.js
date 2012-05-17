@@ -4,6 +4,7 @@ function SwaggerService(discoveryUrl, _apiKey, statusCallback) {
 
   // constants
   discoveryUrl = jQuery.trim(discoveryUrl);
+
   if (discoveryUrl.length == 0)
   throw new Error("discoveryUrl must be passed while creating SwaggerService");
 
@@ -126,10 +127,10 @@ function SwaggerService(discoveryUrl, _apiKey, statusCallback) {
     },
 
     setBaseUrl: function(u) {
-		this.baseUrl = u;
-		this.operations.each(function(o) {
-			o.baseUrl = u;
-		});
+  		this.baseUrl = u;
+  		this.operations.each(function(o) {
+  			o.baseUrl = u;
+  		});
     },
 
     toString: function() {
@@ -363,22 +364,24 @@ function SwaggerService(discoveryUrl, _apiKey, statusCallback) {
 
     fetchEndpoints: function() {
       updateStatus("Fetching API List...");
-	  var baseDiscoveryUrl = endsWith(discoveryUrl, "/") ? discoveryUrl.substr(0, discoveryUrl.length - 1) : discoveryUrl;
-	  if(endsWith(baseDiscoveryUrl, "/resources.json"))
-		baseDiscoveryUrl = baseDiscoveryUrl.substr(0, baseDiscoveryUrl.length - "/resources.json".length);
-	  else if(endsWith(baseDiscoveryUrl, "/resources"))
-		baseDiscoveryUrl = baseDiscoveryUrl.substr(0, baseDiscoveryUrl.length - "/resources".length);
-	
-	  this.discoveryUrlList.push(discoveryUrl);
-	  this.discoveryUrlList.push(baseDiscoveryUrl);
-	  this.discoveryUrlList.push(baseDiscoveryUrl + "/resources.json");
-	  this.discoveryUrlList.push(baseDiscoveryUrl + "/resources");
-	  
-	  log("Will try the following urls to discover api endpoints:")
-	  for(var i = 0; i < this.discoveryUrlList.length; i++)
-		log(" > " + this.discoveryUrlList[i]);
-	
-	  this.fetchEndpointsSeq();
+      var baseDiscoveryUrl = endsWith(discoveryUrl, "/") ? discoveryUrl.substr(0, discoveryUrl.length - 1) : discoveryUrl;
+
+      if(endsWith(baseDiscoveryUrl, "/resources.json")){
+        baseDiscoveryUrl = baseDiscoveryUrl.substr(0, baseDiscoveryUrl.length - "/resources.json".length);
+      }
+      else if(endsWith(baseDiscoveryUrl, "/resources")){
+        baseDiscoveryUrl = baseDiscoveryUrl.substr(0, baseDiscoveryUrl.length - "/resources".length);
+      }
+      this.discoveryUrlList.push(discoveryUrl);
+      this.discoveryUrlList.push(baseDiscoveryUrl);
+      this.discoveryUrlList.push(baseDiscoveryUrl + "/resources.json");
+      this.discoveryUrlList.push(baseDiscoveryUrl + "/resources");
+
+      log("Will try the following urls to discover api endpoints:");
+      for(var i = 0; i < this.discoveryUrlList.length; i++) {
+        log(" > " + this.discoveryUrlList[i]);
+      }
+      this.fetchEndpointsSeq();
     },
 
     fetchEndpointsSeq: function() {
@@ -393,6 +396,8 @@ function SwaggerService(discoveryUrl, _apiKey, statusCallback) {
 	      .success(function(response) {
 		      log("Setting globalBasePath to " + response.basePath);
 		      globalBasePath = response.basePath;
+          globalBasePath = endsWith(globalBasePath, "/") ? globalBasePath.substr(0, globalBasePath.length - 1) : globalBasePath;
+          
 		      ApiResource.createAll(response.apis);  
 	          controller.fetchResources(response.basePath);
 	      })
