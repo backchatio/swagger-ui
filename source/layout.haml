@@ -9,12 +9,13 @@
     %title= "BackChat.io API Explorer"
     
     %link{:href => "//ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/themes/smoothness/jquery-ui.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}
-    %link{:href => "//assets.backchat.io/stylesheets/watercolour.css?1", :media => "screen", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "//assets.backchat.io/stylesheets/watercolour.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}
     %link{:href => "stylesheets/screen.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}
     %link{:href => "stylesheets/pygment_github.css", :media => "screen", :rel => "stylesheet", :type => "text/css"}
 
     %script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"}
     %script{:src => "//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"}
+    %script{:src => "//assets.backchat.io/javascripts/fixed-sidebar.js"}
     %script{:src => "javascripts/app.js"}
     %script{:src => "javascripts/swagger-service.js"}
     %script{:src => "javascripts/swagger-ui.js"}
@@ -66,7 +67,7 @@
             <strong>Download</strong> API Docs <strong>PDF</strong>
 
     %article.wrapper
-      %header#sidebar
+      %header#sidebar.fixed-sidebar
         %h2 Configuration
         
         %p <strong>Use your API key</strong> to explore the API using your BackChat.io account.
