@@ -65,6 +65,7 @@ function SwaggerService(discoveryUrl, _apiKey, statusCallback) {
       this.path_json = this.path.replace("{format}", "json");
       this.path_xml = this.path.replace("{format}", "xml");
       this.baseUrl = globalBasePath;
+      this.swaggerBaseUrl = swaggerBasePath;
       this.apiList = Api.sub();
       this.modelList = ApiModel.sub();
     },
