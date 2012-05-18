@@ -13,6 +13,7 @@ function SwaggerService(discoveryUrl, _apiKey, statusCallback) {
   }
 
   var globalBasePath = null;
+  var swaggerBasePath = null;
   var formatString = ".{format}";
   var statusListener = statusCallback;
   var apiKey = _apiKey;
@@ -372,6 +373,9 @@ function SwaggerService(discoveryUrl, _apiKey, statusCallback) {
       else if(endsWith(baseDiscoveryUrl, "/resources")){
         baseDiscoveryUrl = baseDiscoveryUrl.substr(0, baseDiscoveryUrl.length - "/resources".length);
       }
+
+      swaggerBasePath = baseDiscoveryUrl;
+
       this.discoveryUrlList.push(discoveryUrl);
       this.discoveryUrlList.push(baseDiscoveryUrl);
       this.discoveryUrlList.push(baseDiscoveryUrl + "/resources.json");
@@ -428,7 +432,7 @@ function SwaggerService(discoveryUrl, _apiKey, statusCallback) {
     fetchResource: function(apiResource) {
       var controller = this;
       updateStatus("Fetching " + apiResource.name + "...");
-      var resourceUrl = globalBasePath + apiResource.path_json + apiKeySuffix;
+      var resourceUrl = swaggerBasePath + apiResource.path_json + apiKeySuffix;
       log("resourceUrl: %o", resourceUrl);
       $.getJSON(resourceUrl,
       function(response) {
